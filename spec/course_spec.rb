@@ -32,4 +32,15 @@ describe Course do
       expect(@course.full?).to be false
     end
   end
+
+  describe '#enroll' do
+    it 'can add students to the course' do
+      expect(@course.students).to eq([])
+
+      @course.enroll(@student1)
+      @course.enroll(@student2)
+
+      expect(@course.students).to eq([@student1, @student2])
+    end
+  end
 end
