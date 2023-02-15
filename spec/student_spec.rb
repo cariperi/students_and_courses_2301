@@ -34,4 +34,14 @@ describe Student do
       expect(@student.scores).to eq([89, 78])
     end
   end
+
+  describe '#grade' do
+    it 'returns the average of all student scores' do
+      @student.log_score(89)
+      @student.log_score(78)
+
+      expect(@student.grade).to be_a Float
+      expect(@student.grade).to eq(83.5)
+    end
+  end
 end
