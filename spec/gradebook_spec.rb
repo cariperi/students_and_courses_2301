@@ -124,4 +124,14 @@ describe Gradebook do
       expect(@gradebook.students_with_grades(70, 100)).to_not include (@student4)
     end
   end
+
+  describe '#grade_in_range' do
+    it 'can check to see if a grade is within a given range' do
+      @student1.log_score(50)
+      @student2.log_score(100)
+
+      expect(@gradebook.grade_in_range?(@student1.grade, 70, 100)).to be false
+      expect(@gradebook.grade_in_range?(@student2.grade, 70, 100)).to be true
+    end
+  end
 end
