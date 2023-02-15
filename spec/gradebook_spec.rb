@@ -10,6 +10,7 @@ describe Gradebook do
     @student1 = Student.new({name: "Morgan", age: 21})
     @student2 = Student.new({name: "Jordan", age: 29})
     @student3 = Student.new({name: "Kate", age: 25})
+    @student4 = Student.new({name: "Alice", age: 30})
     @gradebook = Gradebook.new("Prof. Turing")
   end
 
@@ -68,15 +69,18 @@ describe Gradebook do
       @student1.log_score(50)
       @student2.log_score(100)
       @student3.log_score(75)
+      @student4.log_score(60)
       @course1.enroll(@student1)
       @course1.enroll(@student2)
       @course2.enroll(@student3)
+      @course2.enroll(@student4)
       @gradebook.add_course(@course1)
       @gradebook.add_course(@course2)
 
       expect(@gradebook.students_below(60)).to be_a Array
       expect(@gradebook.students_below(60)[0]).to be_a Student
       expect(@gradebook.students_below(60)).to eq([@student1])
+      expect(@gradebook.students_below(60)).to_not include(@student4)
     end
   end
 end
