@@ -29,4 +29,9 @@ class Gradebook
     all_students = @courses.map{|course| course.students}.flatten
     all_students.map{|student| student.grade}.sort
   end
+
+  def students_with_grades(low_end, high_end)
+    all_students = @courses.map{|course| course.students}.flatten
+    all_students.find_all{|student| (student.grade >= low_end) && (student.grade <= high_end)}
+  end
 end
