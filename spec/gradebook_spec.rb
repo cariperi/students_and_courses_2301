@@ -83,4 +83,24 @@ describe Gradebook do
       expect(@gradebook.students_below(60)).to_not include(@student4)
     end
   end
+
+  describe '#all_grades' do
+    it 'can print grades for all courses' do
+      @student1.log_score(50)
+      @student1.log_score(100)
+      @student2.log_score(100)
+      @student3.log_score(75)
+      @student4.log_score(60)
+      @course1.enroll(@student1)
+      @course1.enroll(@student2)
+      @course2.enroll(@student3)
+      @course2.enroll(@student4)
+      @gradebook.add_course(@course1)
+      @gradebook.add_course(@course2)
+
+      expect(@gradebook.all_grades).to be_a Array
+      expect(@gradebook.all_grades.count).to eq(4)
+      expect(@gradebook.all_grades).to eq([60, 75, 75, 100])
+    end
+  end
 end
