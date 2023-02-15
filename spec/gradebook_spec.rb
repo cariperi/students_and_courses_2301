@@ -46,4 +46,20 @@ describe Gradebook do
       expect(@gradebook.add_course(@course2)[0]).to be_a Course
     end
   end
+
+  describe '#list_all_students' do
+    it 'returns a hash of Courses and their students' do
+      @course1.enroll(@student1)
+      @course1.enroll(@student2)
+      @course2.enroll(@student3)
+      @gradebook.add_course(@course1)
+      @gradebook.add_course(@course2)
+
+      expect(@gradebook.list_all_students).to be_a Hash
+      expect(@gradebook.list_all_students.keys).to eq([@course1, @course2])
+      expect(@gradebook.list_all_students.values).to eq([[@student1, @student2], [@student3]])
+      expect(@gradebook.list_all_students[:course1]).to eq([@student1, @student2])
+      expect(@gradebook.list_all_students[:course2]).to eq([@student3])
+    end
+  end
 end
