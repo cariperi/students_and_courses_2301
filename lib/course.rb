@@ -11,4 +11,8 @@ class Course
   def full?
     @students.count >= @capacity
   end
+
+  def enroll(student)
+    @students << student
+  end
 end
