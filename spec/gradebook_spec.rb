@@ -58,8 +58,8 @@ describe Gradebook do
       expect(@gradebook.list_all_students).to be_a Hash
       expect(@gradebook.list_all_students.keys).to eq([@course1, @course2])
       expect(@gradebook.list_all_students.values).to eq([[@student1, @student2], [@student3]])
-      expect(@gradebook.list_all_students[:course1]).to eq([@student1, @student2])
-      expect(@gradebook.list_all_students[:course2]).to eq([@student3])
+      expect(@gradebook.list_all_students[@course1]).to eq([@student1, @student2])
+      expect(@gradebook.list_all_students[@course2]).to eq([@student3])
     end
   end
 end
