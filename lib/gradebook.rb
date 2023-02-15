@@ -24,4 +24,18 @@ class Gradebook
     all_students = @courses.map{|course| course.students}.flatten
     all_students.find_all{|student| student.grade < threshold}
   end
+
+  def all_grades
+    all_students = @courses.map{|course| course.students}.flatten
+    all_students.map{|student| student.grade}.sort
+  end
+
+  def students_with_grades(low_end, high_end)
+    all_students = @courses.map{|course| course.students}.flatten
+    all_students.find_all{|student| grade_in_range?(student.grade, low_end, high_end)}
+  end
+
+  def grade_in_range?(grade, low_end, high_end)
+    (grade >= low_end) && (grade <= high_end)
+  end
 end
