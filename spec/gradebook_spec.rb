@@ -43,6 +43,7 @@ describe Gradebook do
       @gradebook.add_course(@course1)
 
       expect(@gradebook.add_course(@course2)).to eq([@course1, @course2])
+      expect(@gradebook.add_course(@course2)[0]).to be_a Course
     end
   end
 end
