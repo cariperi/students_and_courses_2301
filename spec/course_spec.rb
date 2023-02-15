@@ -31,6 +31,13 @@ describe Course do
     it 'can respond false when course is not at capacity' do
       expect(@course.full?).to be false
     end
+
+    it 'can respond true when course is at capacity' do
+      @course.enroll(@student1)
+      @course.enroll(@student2)
+
+      expect(@course.full?).to be true
+    end
   end
 
   describe '#enroll' do
