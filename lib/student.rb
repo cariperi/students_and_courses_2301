@@ -12,4 +12,8 @@ class Student
   def log_score(score)
     @scores << score
   end
+
+  def grade
+    (@scores.sum).fdiv(@scores.count)
+  end
 end
