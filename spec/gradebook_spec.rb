@@ -28,4 +28,21 @@ describe Gradebook do
       expect(@gradebook.courses).to be_a Array
     end
   end
+
+  describe '#add_course' do
+    it 'can add courses to the gradebook' do
+      expect(@gradebook.courses).to eq([])
+
+      @gradebook.add_course(@course1)
+      @gradebook.add_course(@course2)
+
+      expect(@gradebook.courses).to eq([@course1, @course2])
+    end
+
+    it 'returns a list of all courses' do
+      @gradebook.add_course(@course1)
+
+      expect(@gradebook.add_course(@course2)).to eq([@course1, @course2])
+    end
+  end
 end
