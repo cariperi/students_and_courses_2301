@@ -39,7 +39,7 @@ describe Gradebook do
       expect(@gradebook.courses).to eq([@course1, @course2])
     end
 
-    it 'returns a list of all courses' do
+    it 'can return a list of all courses' do
       @gradebook.add_course(@course1)
 
       expect(@gradebook.add_course(@course2)).to eq([@course1, @course2])
@@ -48,7 +48,7 @@ describe Gradebook do
   end
 
   describe '#list_all_students' do
-    it 'returns a hash of Courses and their students' do
+    it 'can return a hash of Courses and their students' do
       @course1.enroll(@student1)
       @course1.enroll(@student2)
       @course2.enroll(@student3)
@@ -60,6 +60,23 @@ describe Gradebook do
       expect(@gradebook.list_all_students.values).to eq([[@student1, @student2], [@student3]])
       expect(@gradebook.list_all_students[@course1]).to eq([@student1, @student2])
       expect(@gradebook.list_all_students[@course2]).to eq([@student3])
+    end
+  end
+
+  describe '#students_below' do
+    it 'can return a list of students with grades below a given threshold' do
+      @student1.log_score(50)
+      @student2.log_score(100)
+      @student3.log_score(75)
+      @course1.enroll(@student1)
+      @course1.enroll(@student2)
+      @course2.enroll(@student3)
+      @gradebook.add_course(@course1)
+      @gradebook.add_course(@course2)
+
+      expect(@gradebook.students_below(60)).to be_a Array
+      expect(@gradebook.students_below(60)[0]).to be_a Student
+      expect(@gradebook.students_below(60)).to eq([@student1])
     end
   end
 end
